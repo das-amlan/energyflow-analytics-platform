@@ -1,0 +1,79 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python packaging and builds
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Databricks local CLI files
+.databricks/
+.databricks-cache/
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Datasets and generated data
+data/raw/
+data/processed/
+*.parquet
+*.arrow
+*.duckdb
+*.duckdb.wal
+
+# Trained models and artifacts
+models/
+*.pth
+*.pt
+*.pkl
+*.joblib
+*.onnx
+
+# MLflow local experiment artifacts
+mlruns/
+mlartifacts/
+
+# Evidently generated reports
+reports/
+evidently_reports/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE local settings
+.vscode/
+.idea/

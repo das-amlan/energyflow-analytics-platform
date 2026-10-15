@@ -1,0 +1,127 @@
+
+# ==========================================
+# EnergyFlow Analytics Platform
+# Central Project Configuration
+# ==========================================
+
+project:
+  name: energyflow-analytics-platform
+  environment: dev
+
+# ------------------------------------------
+# Databricks / Unity Catalog
+# ------------------------------------------
+
+databricks:
+  catalog: workspace
+  schema: energyflow
+
+# ------------------------------------------
+# Dataset Configuration
+# ------------------------------------------
+
+data:
+  source: pjm
+  region: PJME
+
+  timestamp_column: Datetime
+  target_column: PJME_MW
+
+  frequency: hourly
+  timezone: America/New_York
+
+  tables:
+    raw: pjm_raw
+    clean: pjm_clean
+    features: pjm_features
+    predictions: pjm_predictions
+    monitoring: pjm_monitoring
+
+# ------------------------------------------
+# Feature Engineering
+# ------------------------------------------
+
+features:
+  calendar:
+    - hour
+    - day_of_week
+    - month
+    - is_weekend
+
+  lags:
+    - 1
+    - 24
+    - 48
+    - 168
+
+  rolling_windows:
+    - 24
+    - 168
+
+# ------------------------------------------
+# Model Configuration
+# ------------------------------------------
+
+model:
+  name: energy_demand_forecaster
+  type: lstm
+
+  input_sequence_length: 168
+  forecast_horizon: 24
+
+  lstm:
+    hidden_size: 64
+    num_layers: 2
+    dropout: 0.2
+    batch_size: 32
+    learning_rate: 0.001
+    epochs: 30
+
+# ------------------------------------------
+# Data Splitting
+# ------------------------------------------
+
+training:
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+
+  split_method: chronological
+
+  random_seed: 42
+
+# ------------------------------------------
+# MLflow Tracking
+# ------------------------------------------
+
+mlflow:
+  experiment_name: /Shared/energyflow-experiments
+
+# ------------------------------------------
+# Model Monitoring
+# ------------------------------------------
+
+monitoring:
+  enabled: true
+
+  reference_window_days: 30
+  current_window_days: 7
+
+  metrics:
+    - mae
+    - rmse
+    - data_drift
+    - prediction_drift
+
+# ------------------------------------------
+# Streamlit Dashboard
+# ------------------------------------------
+
+app:
+  title: EnergyFlow Analytics Platform
+  forecast_horizon: 24
+
+  pages:
+    - historical_analysis
+    - demand_forecasting
+    - model_monitoring

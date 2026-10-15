@@ -1,0 +1,56 @@
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "energyflow-analytics-platform"
+version = "0.1.0"
+description = "End-to-end energy demand forecasting and MLOps platform built on Databricks."
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "numpy>=1.26,<3",
+    "pandas>=2.0,<3",
+    "scikit-learn>=1.4,<2",
+    "pyyaml>=6,<7",
+]
+
+[project.optional-dependencies]
+
+spark = [
+    "pyspark>=3.5,<5",
+]
+
+training = [
+    "torch>=2.2,<3",
+    "xgboost>=2.0,<4",
+    "mlflow>=2.15,<4",
+]
+
+monitoring = [
+    "evidently>=0.7,<1",
+]
+
+app = [
+    "streamlit>=1.35,<2",
+    "databricks-sql-connector>=3,<5",
+]
+
+dev = [
+    "pytest>=8,<10",
+    "ruff>=0.6,<1",
+    "build>=1,<2",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
