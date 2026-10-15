@@ -24,6 +24,10 @@ data:
   source: pjm
   region: PJME
 
+  source_file:
+    volume: pjm_source
+    filename: PJME_hourly.csv
+
   timestamp_column: Datetime
   target_column: PJME_MW
 
