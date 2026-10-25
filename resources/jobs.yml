@@ -1,0 +1,19 @@
+
+resources:
+  jobs:
+    energyflow_data_pipeline:
+      name: energyflow-data-pipeline
+
+      description: >
+        PJM electricity demand ingestion,
+        validation, cleaning, and feature engineering.
+
+      max_concurrent_runs: 1
+
+      tasks:
+        - task_key: run_data_pipeline
+          notebook_task:
+            notebook_path: ../notebooks/run_data_pipeline.ipynb
+
+          max_retries: 1
+          min_retry_interval_millis: 30000

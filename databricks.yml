@@ -1,0 +1,11 @@
+
+bundle:
+  name: energyflow-analytics-platform
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
