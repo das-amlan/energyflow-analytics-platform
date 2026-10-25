@@ -1,0 +1,6 @@
+
+streamlit>=1.35,<2
+databricks-sdk>=0.40
+databricks-sql-connector>=3,<5
+pandas>=2.0,<3
+plotly>=5,<7
