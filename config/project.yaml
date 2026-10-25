@@ -40,6 +40,7 @@ data:
     features: pjm_features
     predictions: pjm_predictions
     monitoring: pjm_monitoring
+    drift_reports: pjm_drift_reports
 
 # ------------------------------------------
 # Feature Engineering

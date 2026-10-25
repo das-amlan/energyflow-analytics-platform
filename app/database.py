@@ -113,3 +113,19 @@ def get_monitoring():
         ORDER BY forecast_date
         """
     )
+
+
+def get_drift_report():
+    """Retrieve the latest stored Evidently report."""
+
+    return query_dataframe(
+        """
+        SELECT
+            generated_at,
+            report_html
+        FROM workspace.energyflow.pjm_drift_reports
+        ORDER BY generated_at DESC
+        LIMIT 1
+        """
+    )
+    

@@ -1,12 +1,14 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import streamlit.components.v1 as components
 
 from database import (
     get_historical_demand,
     get_forecast_origins,
     get_forecast,
     get_monitoring,
+    get_drift_report,
 )
 
 
@@ -233,11 +235,28 @@ try:
         )
 
         st.subheader("Evidently Drift Monitoring")
-        st.info(
-            "The Evidently report has been generated "
-            "in Databricks. Persisted drift statistics "
-            "will be integrated into this page next."
-        )
+        @st.cache_data(ttl=300, show_spinner=False)
+        def load_drift_report():
+            return get_drift_report()
+
+
+        drift_df = load_drift_report()
+
+        if drift_df.empty:
+            st.warning("No Evidently drift report available.")
+        else:
+            generated_at = drift_df.iloc[0]["generated_at"]
+            report_html = drift_df.iloc[0]["report_html"]
+
+            st.caption(
+                f"Last generated: {generated_at} UTC"
+            )
+
+            components.html(
+                report_html,
+                height=850,
+                scrolling=True,
+            )
 
 except Exception as exc:
     st.error("Unable to load dashboard data.")
