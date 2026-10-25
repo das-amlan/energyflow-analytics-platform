@@ -8,8 +8,6 @@ from databricks.sdk.core import Config
 CATALOG = "workspace"
 SCHEMA = "energyflow"
 
-warehouse_id = os.environ["DATABRICKS_WAREHOUSE_ID"]
-http_path = f"/sql/1.0/warehouses/{warehouse_id}"
 
 TABLES = {
     "history": f"{CATALOG}.{SCHEMA}.pjm_clean",
@@ -21,7 +19,8 @@ TABLES = {
 def get_connection():
     """Connect using the Databricks App's managed identity."""
 
-    http_path = os.environ.get("DATABRICKS_SQL_HTTP_PATH")
+    warehouse_id = os.environ["DATABRICKS_WAREHOUSE_ID"]
+    http_path = f"/sql/1.0/warehouses/{warehouse_id}"
 
     if not http_path:
         raise RuntimeError(
