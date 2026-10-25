@@ -10,6 +10,10 @@ The platform uses **PyTorch LSTM** to predict the next 24 hours of electricity d
 
 ![EnergyFlow Analytics Platform Demo](assets/energyflow-demo.gif)
 
+![EnergyFlow Analytics Platform Demo](assets/hisEng.png)
+![EnergyFlow Analytics Platform Demo](assets/forecastEng.png)
+![EnergyFlow Analytics Platform Demo](assets/datadriftEng.png)
+
 *Interactive Streamlit dashboard showing electricity demand analysis, 24-hour forecasts, and model monitoring.*
 
 ## Key Features
