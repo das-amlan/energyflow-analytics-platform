@@ -73,8 +73,14 @@ def get_forecast_origins():
     )
 
 
+
 def get_forecast(origin):
     """Return the 24-hour forecast at the selected origin."""
+
+    import pandas as pd
+
+    # Convert Pandas Timestamp to native Python datetime.
+    origin = pd.Timestamp(origin).to_pydatetime()
 
     return query_dataframe(
         f"""
@@ -85,7 +91,7 @@ def get_forecast(origin):
             actual_mw,
             absolute_error_mw
         FROM {TABLES['predictions']}
-        WHERE forecast_origin = ?
+        WHERE forecast_origin = CAST(? AS TIMESTAMP_NTZ)
         ORDER BY horizon_hour
         """,
         parameters=[origin],
